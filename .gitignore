@@ -1,7 +1,5 @@
 node_modules/
-dist/
-.local/
-.env
+.mirror-cache/
+.golden-run/
+.tmp/
 *.log
-test-results/
-playwright-report/

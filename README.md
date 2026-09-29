@@ -1,165 +1,113 @@
 # 三世镜 / Threefold Mirror
 
-过去的我告诉我，我为什么成为今天的我。未来的我告诉我，今天的我正在成为谁。而现在的我，决定这一切。
+**三世镜是一套基于个人长期记忆运行的 Agent Framework。**
+它试图理解你如何从过去成为现在，当前的你处于什么状态，以及不同选择可能把你带向怎样的未来，让这些理解参与现在的决策。
 
-一个本地优先的 **Temporal Self Modeling** Demo：从 Obsidian 中的真实记录建立带出处的状态模型，比较未来分支，记录干预与结果，让新的现实成为下一次判断的依据。
+Obsidian 保存人生证据；同一个 **Mirror Agent** 通过过去、现在、未来三种时间视角工作。过去需要证据，现在是持续更新的 Self Model，未来是带假设的条件模拟。最终选择属于用户。
 
-## 运行
+它不是 App、Dashboard、数字人、心理测量工具或人生预测服务。没有界面、Web 服务、模型账号管理或三个互相聊天的人格。
 
-需要 Node.js **22.12 或更新版本**。首次安装依赖需要联网；离线模式运行时不需要网络、账号或 API Key。项目没有远程字体、统计脚本或云数据库。
+## 如何运行
 
-Windows 双击 **`Start-Mirror.cmd`**。脚本安装缺失的依赖、构建并打开浏览器。运行期间保留命令窗口，按 Ctrl+C 停止服务。
+```text
+原始人生记录 → 检索证据 → 过去轨迹 → 当前 Self Model
+                                      ↓
+                    Decision → 多个条件未来 → 用户选择
+                                      ↓
+                          行动 → Outcome → Reflection
+                                      ↓
+                      新状态 + 新历史 → 下一次决策
+```
 
-也可以在项目目录执行：
+推理由当前调用它的 Codex、Astra、Claude Code 或其他 Agent 完成。这里提供可移植的 Schema、Workflow、证据协议、模板，以及确定性的本地 CLI。**CLI 不会独立理解人生，也不会调用一个隐藏的 LLM。**
+
+将整个仓库提供给 Agent，然后说：
+
+> 阅读 `skills/threefold-mirror/SKILL.md`。我的 Vault 在 `D:\Notes\Life`。用 Decision Mirror 帮我分析“未来三个月是否主要投入这个项目”。已有笔记只读；将三世镜记录写入 `ThreefoldMirror/`。先检索证据，遇到缺口保留未知。
+
+Skill 的引用以本仓库为根；请保留整个仓库，不要只复制单个 SKILL.md。无需安装 Obsidian 插件或更换用户目录结构。
+
+## 本地运行与可复查示例
+
+需要 Node.js 22.12+。依赖安装需联网；以下命令自身不会发起网络请求。
 
 ```sh
 npm ci
-npm run dev
+npm run check
+npm test
+npm run golden
 ```
 
-访问 <http://127.0.0.1:4317>。开发模式自动刷新。稳定运行版本：
+`golden` 使用 [虚构 Vault](examples/golden-vault)，**不是你的个人资料**。它执行完整闭环，再执行一次检查无重复记录，输出 [运行报告](examples/GOLDEN_PATH_REPORT.md)。示例的十月 Outcome 是明确模拟的未来资料。它验证数据闭环，不声称验证真实个人预测准确率或不同 Agent 的理解质量。
 
-```sh
-npm run build
-npm start
-```
-
-服务只监听 `127.0.0.1`，不暴露到局域网。`PORT` 可覆盖端口。修改 `.env` 后重启服务。
-
-## 第一次体验
-
-1. 点击“先体验示例人生”。这是独立的虚构资料，始终有显眼标识；不代表使用者。
-2. 在“三世镜”中点击状态卡片的“依据”，查看原文件、行号、引用和上下文。
-3. 点击“记录此刻”，记录真实变化或尝试不同精力状态。新记录写回 Markdown，当前模型与未来同时更新。
-4. 在“决策镜”输入一个具体选择，修改 2–4 个选项，比较 1 个月、3 个月、1 年的分支；展开每条路径的假设、主要变量、风险与不确定性。
-5. 选择一个分支，写下具体行动与检验时间。计划被标为计划，不会写成已完成的结果。
-6. 现实发生后，记录真实结果、反思，以及“看到预测是否改变了行动”。新的自述重新进入模型。
-
-可以先沿着示例人物“新项目过多 → 身体消耗 → 小范围交付”的材料体验。界面中的未来声音是条件推演的反思视角，不是一个声称真实存在的未来人格。
-
-## 连接自己的 Obsidian
-
-点击侧栏 Vault 卡片，填入文件夹的完整路径，例如 `D:\Notes\MyVault`。先“只读预览”，确认范围，再“连接并建立三世镜”。不必安装 Obsidian 插件。可以排除任意相对目录，每行一个，如 `Private`、`Work/Confidential`。
-
-只读取 `.md`；跳过隐藏目录、`.obsidian`、`.trash`、`node_modules`、符号链接和目录联接。第一版限制 1500 篇、合计 30 MB、单篇 500 KB；超限会明确报错或显示跳过说明。无日期的记录可作为背景，但不会拿来断言今天的状态；超过 45 天的状态会标记待补充，未来日期的记录不作为过去证据。
-
-日期优先来自 YAML `date`，其次 `created_at`，最后文件名中的 `YYYY-MM-DD`。同一天的应用记录按 `created_at` 精确排序；外部笔记可加 `observed_at` 明确事件时间。没有日期时不会擅自用文件修改时间代替人生时间。
-
-```md
----
-title: 今天的一次小交付
-date: 2026-09-29
----
-
-# 今天的一次小交付
-
-今天完成了项目的一个小版本，收到朋友的反馈。
-最近睡眠约7小时，精力恢复。决定下周继续控制项目范围。
-```
-
-新增、修改、删除资料后，界面每 30 秒检查一次指纹并提示更新；点击“更新三世镜”重建。记录此刻、行动或复盘会立即重建。重建时读取真实文件，不依赖远程索引。
-
-## Obsidian 是长期记忆
-
-原始笔记不被修改。应用只在以下独立目录追加记录：
-
-```text
-你的 Vault/
-  原有笔记……
-  ThreefoldMirror/
-    Models/          # 过去线索 + 当前状态 + 未来假设，版本化快照
-    Decisions/       # 决策、各分支 Prediction 和修订记录
-    Checkins/        # 当前状态的用户自述
-    Interventions/   # 选择的路径及尚待执行/验证的行动计划
-    Reflections/     # Outcome、Reflection、是否受到预测影响
-```
-
-每条记录使用 YAML Frontmatter + 人类可读正文，包含 `schema_version`、`source`、`created_at`、`updated_at`、`confidence`、`evidence`、`status`、`generated_by`。模型中每个判断有独立来源与类型。正文保留 Obsidian 双链，决策保留当时的证据快照。
-
-所有快照追加写入，不覆盖旧版本；写入通过同目录临时文件与原子创建完成。行动/复盘的用户事件是结果的权威记录：即使进程在写决策修订前中断，重启也可从事件恢复。
-
-`Models/`、`Decisions/` 中的 AI 内容不再作为历史人生事实进入下一轮。只有源笔记和独立目录中 `generated_by: user`、`kind: self_report` 的记录会进入资料集合。这样防止模型不断引用自己的猜测。
-
-`.local/config.json` 只保存本机连接路径和非敏感模型配置；删除或迁移后重新连接同一 Vault 可恢复模型与决策。示例资料保存在 `.local/demo-vault/`，测试资料在 `.local/browser-test/`。这些路径和 `.env` 全部被 Git 忽略。
-
-没有必须备份的派生数据库。**请按自己的习惯备份 Vault**，其中包含所有长期记录。手工编辑模型的结构化字段后重启应用可重新读取；普通历史笔记变化直接点击更新即可。
-
-## 两种分析模式
-
-### 默认：离线规则
-
-完全本地、可复现。提取正文中的心智、身体、创造、关系、知识、资源、价值、习惯线索；数值只取明确自述（如睡眠小时），不制造人格分数。跨文档重复主题被标为低置信度推断；状态与行动计划参与未来的条件分支。
-
-**这是可运行的离线基线，不等于具备完整语义理解的 AI。** 它不可靠地理解否定、讽刺或复杂因果；变化趋势是关键词信号，不能当诊断或人格定论。离线分支对投入强度类选择最有解释力；复杂、领域特定的选择应使用模型模式并人工核对。
-
-### 可选：语言模型
-
-“模型与设置”可选择兼容 Chat Completions JSON 返回格式的服务。填写真实 Base URL 和模型 ID。可接入本机模型（例如 `http://localhost:11434/v1`）；也可使用支持该协议的远程服务或网关。需要密钥时复制 `.env.example` 为 `.env`，只在服务端配置 `MIRROR_API_KEY`。
-
-远程端点要求 HTTPS 和明确的数据发送同意。实际发送的是引用片段（包含文件名、行号与日期）、当前模型和决策输入，不是整个 Vault 原文。密钥不进入前端、不写入 Obsidian，也不打印到日志。连接新 Vault 会恢复离线模式并清除远程发送同意。
-
-模型输出经过 Zod 验证、证据 ID 白名单检查、分支选项与 1/3/12 月份验证；模型不得把新判断写成事实，confidence 上限为 medium。引用校验只能确保出处存在，**不能自动证明语义正确**。无效结果不会落入模型快照，错误会反馈给用户；如果之前已保存用户记录，界面明确提示“记录已保存、建模未完成”，可以重试。
-
-Provider 实现可在 `server/provider.ts` 中替换：`TemporalProvider` 只有 `model()` 和 `decision()` 两个入口。核心文件存储、来源约束与决策生命周期不依赖某一家模型。当前没有原生 Claude/Gemini SDK；可经兼容网关，或者新增适配器。
-
-此交付已测试离线链路与模型返回的验证逻辑；**没有使用你的模型密钥，也没有验证实际云服务生成质量**。
-
-## 数据与工程结构
-
-```text
-shared/schema.ts    类型、Zod schema、来源四分法、模型/分支/决策协议
-server/vault.ts     安全边界、Markdown/YAML、指纹、追加写入
-server/engine.ts    纯离线建模与条件模拟
-server/provider.ts Provider 协议、兼容接口、引用约束
-server/service.ts  业务闭环与状态恢复
-server/index.ts    本机 API、串行写入、来源/Host 检查
-src/App.tsx        应用容器、导航、更新与操作状态
-src/temporal.tsx   三世镜、现在、过去、未来与记录视图
-src/decisions.tsx  决策、分支、行动、结果与复盘
-src/forms.tsx      导入、轻记录、证据追溯与模型设置
-src/ui.tsx         镜面场景、证据按钮与可访问对话框
-src/styles.css     镜面视觉系统、响应式、减少动画偏好
-tests/             文件系统、模型、恢复与浏览器流程测试
-```
-
-`fact`（独立事实）、`self_report`（用户自述）、`inference`（模型推断）、`hypothesis`（假设）是分开的枚举。第一版原笔记默认按用户自述处理，不能因为“写在 Markdown 中”就视为独立验证的事实。置信度使用 low / medium / high / unknown；离线生成的推断默认 low，而非伪精确百分比。
-
-决策生命周期：`open → acting → reflected`。Prediction 保留全部反事实分支；Intervention 记录选择与行动；Outcome 记录用户报告的实际结果；Reflection 记录解释和是否因推演而改变行为。不会自动给出“准确率”或把预测落空等同于失败。
-
-所有 API 只面向本机单用户。服务拒绝跨站 Origin 与不匹配的 Host，写入串行化，防止同时保存时丢失变更。笔记通过 React 文本渲染，原始 HTML 不会执行。禁止路径越界与链接目录写入。
-
-## 验证与开发
-
-```sh
-npm test          # 核心文件、来源、状态变化、重启恢复、模型引用约束
-npm run build     # TypeScript 检查 + 生产构建
-npm run format    # 统一格式
-```
-
-浏览器流程在独立端口 **4318** 和 `.local/browser-test` 中运行，不会使用正常应用连接的个人 Vault：
-
-```sh
-npx playwright install chromium
-npm run test:ui
-```
-
-已安装 Chrome 时，PowerShell 可跳过下载：
+在 PowerShell 中查看示例：
 
 ```powershell
-$env:PLAYWRIGHT_CHANNEL = 'chrome'
-npm run test:ui
+$vault = (Resolve-Path 'examples/golden-vault').Path
+npm run mirror -- retrieve --vault "$vault" --query "项目 精力" --at 2026-09-29
+npm run mirror -- model --vault "$vault" --at 2026-10-29
+npm run mirror -- validate --vault "$vault"
+npm run mirror -- history --vault "$vault"
+npm run mirror -- rebuild --vault "$vault" --at 2026-10-29
 ```
 
-测试覆盖：真实页面操作、证据抽屉、状态更新、分支时间切换、行动、复盘、刷新恢复、手机无横向溢出。截图输出到 `test-results/`。
+真实 Vault 换成你的绝对路径。`retrieve` 返回原文候选与独立标记的推理记录；Agent 必须读上下文，不能把关键词命中当模式。可重复传 `--exclude Private` 限制本次检索；它不成为隐式全局配置。
 
-## 下一步演化
+Agent 先在工作目录准备 Markdown，再执行：
 
-- 以明确评测样本扩展语义提取，增加用户纠正/确认机制，区分稳定倾向与短期波动。
-- 增加文件监听与可重建本地索引，支持更大 Vault；保留对 Obsidian 文件的单一权威。
-- 以真实同类历史结果改进决策相似性，增加每次推演的模型版本和校准评估。
-- 对干预前后的轨迹分别评估，逐步建立 Intervention Value；不要把相关性写成因果。
-- 添加桌面壳、原生目录选择器和更多 Provider 适配器。
+```sh
+npm run mirror -- append --vault /absolute/vault --file /absolute/draft.md
+```
 
-当前明确边界：没有向量检索、自动语音、长期日程推送、多用户、云同步或统计意义的人生预测。外部编辑的记录以磁盘为准；每次更新保存可回看的版本。大量快照的压缩归档与更复杂的并发编辑冲突属于后续工作。
+`append` 只在 Vault 的 `ThreefoldMirror/` 写入。它校验引用、时序和关联后原子追加；同 ID 同内容重试不重复写入，同 ID 不同内容报错。事件发生时间与记录写入时间分开，新记录时间必须递增。原笔记不改写。
 
-技术参考：[Vite 本地开发与构建](https://vite.dev/guide/)、[Ollama 的兼容接口](https://registry.ollama.com/blog/openai-compatibility)。
+## 一个完整 Decision Mirror
+
+虚构人物林舟问：“未来三个月是否主要投入三世镜？”
+
+1. Mirror 找到 Atlas 暂停、Beacon 小范围交付和 Parser 持续维护。Atlas 同篇笔记提到搬家与照护；这些材料不能证明“技术难点消失就会放弃”。
+2. 当时 Self Model：自述精力偏低，每周确认四小时，重视个人持续使用。每项保留来源、认识论状态、时间范围、置信度、复查日与有效期。
+3. [D-001](examples/golden-vault/ThreefoldMirror/Decisions/D-001.md) 对应 [F-001](examples/golden-vault/ThreefoldMirror/Simulations/F-001.md) 的三个分支：主要投入、限时副项目、暂停。各有假设、原始证据、历史类比及差异、风险、机会、未知、1/3/12 个月变化与递增的不确定性。
+4. 案例用户明确选择 B。选择和“看见模拟后删减功能”的干预分别记录，计划不当作完成。
+5. 用户纠正关于 Atlas 的弱假设。[Correction](examples/golden-vault/ThreefoldMirror/Corrections/C-001.md) 立即使原判断退出当前模型；修订替代旧判断，历史仍可检查。
+6. 四周后 [Outcome](examples/golden-vault/ThreefoldMirror/Outcomes/O-001.md) 报告两个闭环、精力恢复，同时工作交付期结束。[Reflection](examples/golden-vault/ThreefoldMirror/Reflections/R-001.md) 记录干预影响与替代解释，不给没有对照组的结果算“预测准确率”。
+7. 新 State 直接引用 Outcome 原话。[D-002](examples/golden-vault/ThreefoldMirror/Decisions/D-002.md) 再问同题，[F-002](examples/golden-vault/ThreefoldMirror/Simulations/F-002.md) 基于新模型重新生成，使用刚发生的新历史。
+
+## 数据归属与可纠错性
+
+长期事实与推理都保存在人类可读的 **Markdown + YAML Frontmatter** 中：
+
+```text
+Vault/
+  原有笔记……                         # 只读，格式不变
+  ThreefoldMirror/
+    Events/                           # 经历、用户选择、干预
+    States/                           # 有时间尺度的状态修订
+    Patterns/                         # 可证伪的模式与反例
+    Decisions/                        # 问题、选项、限制与资源
+    Simulations/                      # 某时间点的条件分支
+    Outcomes/                         # 用户报告/可靠记录的结果
+    Reflections/                      # 对比、替代解释、待验证经验
+    Corrections/                      # 用户对旧判断的纠正
+  .mirror-cache/index.json             # 派生数据，可删除重建
+```
+
+没有 `persona.md` 或永久 `future-me.md`。Self Model 是当前有效 State/Pattern 的投影；历史判断始终保留。短期状态必须过期，复查到期会降低有效置信度，不会自动升级为人格。新证据可以强化、削弱或替代旧判断。用户纠错先记录 Correction，再按需追加修订。
+
+重要判断保留 wikilink、原话、文件 SHA-256、原始行号、来源时间范围和反证。源文改变时旧引用被标记失效，当前模型不再默默信任它。AI 总结不能成为原始证据；Reflection 的新经验必须重新连到实际 Outcome。校验能确认引用存在，**不能自动证明语义、因果或用户授权正确**，这些是 Mirror 的职责。
+
+本项目的读写与索引在本地进行。实际运行 Agent 时，资料是否发送给远程模型取决于该 Agent 的运行环境；本框架不提供云存储，也不替运行环境承诺离线隐私。无需本框架之后，Markdown 仍能直接打开、检索和用 Git 版本控制。
+
+## 框架入口
+
+| 内容 | 入口 |
+| --- | --- |
+| Agent 路由与约束 | [AGENTS.md](AGENTS.md)、[Skill](skills/threefold-mirror/SKILL.md) |
+| 过去、现在、条件未来 | [Past](workflows/past.md)、[Present](workflows/present.md)、[Future](workflows/future.md) |
+| 决策闭环与纠错 | [Decision Mirror](workflows/decision-mirror.md)、[Reflection / Correction](workflows/reflection-correction.md) |
+| 数据、证据、时间协议 | [Data Contract](references/data-contract.md)、[Evidence](references/evidence.md)、[Temporal Model](references/temporal-model.md) |
+| 数据协议 | [JSON Schema](schemas/record.schema.json)、[字段说明](schemas/README.md)、[模板](templates/) |
+| 确定性实现 | [core/](core/)、[CLI](scripts/mirror.ts)、[测试](tests/protocol.test.ts) |
+| 验收与审计 | [验收表](references/acceptance.md)、[仓库审计](references/repository-audit.md) |
+
+当前边界：本地单 Vault、协作式单写者协议、词语检索候选、不做向量检索或预测校准数学。Node 是参考实现的运行时，不是数据格式依赖。JSON Schema 表达字段结构，跨记录约束由协议和校验器补充。未知 schema_version 拒绝写入；未来升级需显式迁移，不能批量改用户原笔记。
