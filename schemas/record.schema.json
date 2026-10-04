@@ -46,7 +46,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -117,7 +121,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -369,7 +377,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -440,7 +452,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -619,6 +635,13 @@
               "type": "null"
             }
           ]
+        },
+        "prior_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+          }
         },
         "key": {
           "type": "string",
@@ -736,7 +759,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -807,7 +834,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -987,6 +1018,13 @@
             }
           ]
         },
+        "prior_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+          }
+        },
         "key": {
           "type": "string",
           "pattern": "^[a-z][a-z0-9_.-]*$"
@@ -1076,7 +1114,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -1147,7 +1189,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -1357,7 +1403,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -1428,7 +1478,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -1584,7 +1638,11 @@
                   "properties": {
                     "source": {
                       "type": "string",
-                      "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                      "minLength": 1
+                    },
+                    "source_id": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_-]*$"
                     },
                     "sha256": {
                       "type": "string",
@@ -1661,7 +1719,11 @@
                         "properties": {
                           "source": {
                             "type": "string",
-                            "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                            "minLength": 1
+                          },
+                          "source_id": {
+                            "type": "string",
+                            "pattern": "^[a-z][a-z0-9_-]*$"
                           },
                           "sha256": {
                             "type": "string",
@@ -1913,7 +1975,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -1984,7 +2050,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -2190,7 +2260,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -2261,7 +2335,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -2427,7 +2505,11 @@
                   "properties": {
                     "source": {
                       "type": "string",
-                      "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                      "minLength": 1
+                    },
+                    "source_id": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_-]*$"
                     },
                     "sha256": {
                       "type": "string",
@@ -2498,7 +2580,11 @@
                   "properties": {
                     "source": {
                       "type": "string",
-                      "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                      "minLength": 1
+                    },
+                    "source_id": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_-]*$"
                     },
                     "sha256": {
                       "type": "string",
@@ -2669,7 +2755,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -2740,7 +2830,11 @@
             "properties": {
               "source": {
                 "type": "string",
-                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
               },
               "sha256": {
                 "type": "string",
@@ -2868,6 +2962,1503 @@
         "statement",
         "reason",
         "epistemic_status"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,95}$"
+        },
+        "type": {
+          "type": "string",
+          "const": "life_fragment"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d\\.\\d{3}(?:Z))$"
+        },
+        "authored_by": {
+          "type": "string",
+          "const": "user"
+        },
+        "data_origin": {
+          "type": "string",
+          "enum": [
+            "real",
+            "fictional"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "line_start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "line_end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_period": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "source",
+              "sha256",
+              "line_start",
+              "line_end",
+              "quote",
+              "source_period"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "counter_evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "line_start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "line_end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_period": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "source",
+              "sha256",
+              "line_start",
+              "line_end",
+              "quote",
+              "source_period"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "source_period": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": false
+        },
+        "epistemic_status": {
+          "type": "string",
+          "const": "self_report"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurred_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fragment_kind": {
+          "type": "string",
+          "enum": [
+            "interview_answer",
+            "event",
+            "observation",
+            "state_evidence",
+            "interest_signal",
+            "decision_context",
+            "consumption"
+          ]
+        },
+        "question": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "id",
+        "type",
+        "title",
+        "created_at",
+        "authored_by",
+        "data_origin",
+        "evidence",
+        "counter_evidence",
+        "source_period",
+        "epistemic_status",
+        "statement",
+        "occurred_at",
+        "fragment_kind",
+        "question"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,95}$"
+        },
+        "type": {
+          "type": "string",
+          "const": "interview_turn"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d\\.\\d{3}(?:Z))$"
+        },
+        "authored_by": {
+          "type": "string",
+          "enum": [
+            "user",
+            "agent"
+          ]
+        },
+        "data_origin": {
+          "type": "string",
+          "enum": [
+            "real",
+            "fictional"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "line_start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "line_end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_period": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "source",
+              "sha256",
+              "line_start",
+              "line_end",
+              "quote",
+              "source_period"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "counter_evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "line_start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "line_end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_period": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "source",
+              "sha256",
+              "line_start",
+              "line_end",
+              "quote",
+              "source_period"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "source_period": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": false
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "focus": {
+          "type": "string",
+          "enum": [
+            "identity",
+            "current_situation",
+            "values",
+            "important_history",
+            "motivations",
+            "decision_style",
+            "constraints",
+            "relationships",
+            "body_energy",
+            "work_vocation",
+            "knowledge_skills",
+            "resources",
+            "current_goals",
+            "recurring_patterns",
+            "desired_future"
+          ]
+        },
+        "gap": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "contradiction",
+            "low_confidence"
+          ]
+        },
+        "based_on": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "id",
+        "type",
+        "title",
+        "created_at",
+        "authored_by",
+        "data_origin",
+        "evidence",
+        "counter_evidence",
+        "source_period",
+        "question",
+        "reason",
+        "focus",
+        "gap",
+        "based_on"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,95}$"
+        },
+        "type": {
+          "type": "string",
+          "const": "prior_self_knowledge"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d\\.\\d{3}(?:Z))$"
+        },
+        "authored_by": {
+          "type": "string",
+          "enum": [
+            "user",
+            "agent"
+          ]
+        },
+        "data_origin": {
+          "type": "string",
+          "enum": [
+            "real",
+            "fictional"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "line_start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "line_end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_period": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "source",
+              "sha256",
+              "line_start",
+              "line_end",
+              "quote",
+              "source_period"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "counter_evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "line_start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "line_end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_period": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "source",
+              "sha256",
+              "line_start",
+              "line_end",
+              "quote",
+              "source_period"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "source_period": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": false
+        },
+        "epistemic_status": {
+          "type": "string",
+          "const": "derived"
+        },
+        "source_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "import_method": {
+          "type": "string",
+          "const": "user_provided"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "low"
+          ]
+        },
+        "supersedes": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "correction": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "update_reason": {
+          "type": "string",
+          "enum": [
+            "initial",
+            "updated",
+            "weakened",
+            "corrected"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "id",
+        "type",
+        "title",
+        "created_at",
+        "authored_by",
+        "data_origin",
+        "evidence",
+        "counter_evidence",
+        "source_period",
+        "epistemic_status",
+        "source_label",
+        "import_method",
+        "statement",
+        "confidence",
+        "supersedes",
+        "correction",
+        "update_reason"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,95}$"
+        },
+        "type": {
+          "type": "string",
+          "const": "self_model"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d\\.\\d{3}(?:Z))$"
+        },
+        "authored_by": {
+          "type": "string",
+          "enum": [
+            "user",
+            "agent"
+          ]
+        },
+        "data_origin": {
+          "type": "string",
+          "enum": [
+            "real",
+            "fictional"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "line_start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "line_end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_period": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "source",
+              "sha256",
+              "line_start",
+              "line_end",
+              "quote",
+              "source_period"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "counter_evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "line_start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "line_end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_period": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "source",
+              "sha256",
+              "line_start",
+              "line_end",
+              "quote",
+              "source_period"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "source_period": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": false
+        },
+        "version": {
+          "type": "string",
+          "const": "0.1"
+        },
+        "assertion_refs": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+          }
+        },
+        "prior_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+          }
+        },
+        "readiness_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "calibration_focus": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+          }
+        },
+        "coverage": {
+          "minItems": 15,
+          "maxItems": 15,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "domain": {
+                "type": "string",
+                "enum": [
+                  "identity",
+                  "current_situation",
+                  "values",
+                  "important_history",
+                  "motivations",
+                  "decision_style",
+                  "constraints",
+                  "relationships",
+                  "body_energy",
+                  "work_vocation",
+                  "knowledge_skills",
+                  "resources",
+                  "current_goals",
+                  "recurring_patterns",
+                  "desired_future"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "known",
+                  "uncertain",
+                  "contradictory",
+                  "unknown"
+                ]
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                }
+              }
+            },
+            "required": [
+              "domain",
+              "status",
+              "explanation",
+              "refs"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "unknowns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "contradictions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "id",
+        "type",
+        "title",
+        "created_at",
+        "authored_by",
+        "data_origin",
+        "evidence",
+        "counter_evidence",
+        "source_period",
+        "version",
+        "assertion_refs",
+        "prior_refs",
+        "readiness_reason",
+        "summary",
+        "coverage",
+        "unknowns",
+        "contradictions"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,95}$"
+        },
+        "type": {
+          "type": "string",
+          "const": "calibration"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d\\.\\d{3}(?:Z))$"
+        },
+        "authored_by": {
+          "type": "string",
+          "const": "user"
+        },
+        "data_origin": {
+          "type": "string",
+          "enum": [
+            "real",
+            "fictional"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "line_start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "line_end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_period": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "source",
+              "sha256",
+              "line_start",
+              "line_end",
+              "quote",
+              "source_period"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "counter_evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "line_start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "line_end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_period": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "source",
+              "sha256",
+              "line_start",
+              "line_end",
+              "quote",
+              "source_period"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "source_period": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "to": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": false
+        },
+        "epistemic_status": {
+          "type": "string",
+          "const": "self_report"
+        },
+        "model": {
+          "type": "string",
+          "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+        },
+        "feedback": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "target": {
+                "type": "string",
+                "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+              },
+              "response": {
+                "type": "string",
+                "enum": [
+                  "correct",
+                  "wrong",
+                  "partially_correct",
+                  "outdated",
+                  "not_sure"
+                ]
+              },
+              "statement": {
+                "type": "string",
+                "minLength": 1
+              },
+              "correction": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^\\[\\[[^\\[\\]|\\\\]+\\]\\]$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "target",
+              "response",
+              "statement",
+              "correction"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "id",
+        "type",
+        "title",
+        "created_at",
+        "authored_by",
+        "data_origin",
+        "evidence",
+        "counter_evidence",
+        "source_period",
+        "epistemic_status",
+        "model",
+        "feedback"
       ],
       "additionalProperties": false
     }

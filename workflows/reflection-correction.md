@@ -10,8 +10,8 @@ Append Reflection with Outcome citation, comparison, sourced lessons, confidence
 
 ## User correction
 
-1. Resolve the wrong State/Pattern and read the user's statement plus original context. Clarify the target only if ambiguous.
-2. Append Correction with actual user words and reason. The target immediately leaves the current model, even if later work is interrupted.
+1. Resolve the wrong State/Pattern/Prior Self Knowledge and read the user's statement plus original context. Clarify the target only if ambiguous.
+2. Append Correction with actual user words and reason. The target (and claims depending on a corrected prior) immediately leaves the current model, even if later work is interrupted.
 3. If supported, append corrected revision with supersedes and correction links. Confidence may become unknown. User disagreement does not automatically establish a new causal explanation.
 4. Review materially dependent advice. Old simulations stay historical; explain if the correction changes an open decision and generate a fresh simulation if warranted.
 5. Show the new model and retained history. Changing a value or time scope is valid; the user need not accept the previous interpretation.

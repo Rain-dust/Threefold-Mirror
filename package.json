@@ -1,6 +1,6 @@
 {
   "name": "threefold-mirror",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -8,10 +8,14 @@
   },
   "scripts": {
     "mirror": "tsx scripts/mirror.ts",
-    "golden": "tsx scripts/golden-path.ts",
+    "golden": "npm run golden:temporal && npm run golden:bootstrap && npm run golden:interview",
     "test": "tsx --test tests/*.test.ts",
     "check": "tsc --noEmit",
-    "schema": "tsx scripts/export-schema.ts"
+    "schema": "tsx scripts/export-schema.ts",
+    "golden:temporal": "tsx scripts/golden-path.ts",
+    "golden:bootstrap": "tsx scripts/bootstrap-golden.ts",
+    "golden:interview": "tsx scripts/interview-golden.ts",
+    "privacy:audit": "tsx scripts/privacy-audit.ts"
   },
   "dependencies": {
     "tsx": "^4.23.15",

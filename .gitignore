@@ -3,3 +3,12 @@ node_modules/
 .golden-run/
 .tmp/
 *.log
+.threefold-mirror.local.*
+.env
+.env.*
+!.env.example
+/ThreefoldMirror/
+/personal/
+/instances/
+*.private.*
+*.embeddings

@@ -9,11 +9,12 @@ export const period = z.strictObject({ from: day.nullable(), to: day.nullable() 
 export const epistemic = z.enum(['fact', 'self_report', 'observation', 'inference', 'hypothesis']);
 export const confidence = z.enum(['unknown', 'low', 'medium', 'high']);
 export const evidenceSchema = z.strictObject({
-  source: link,
+  source: text,
+  source_id: z.string().regex(/^[a-z][a-z0-9_-]*$/).optional(),
   sha256: z.string().regex(/^[a-f0-9]{64}$/),
   line_start: z.number().int().positive(),
   line_end: z.number().int().positive(),
-  quote: text,
+  quote: z.string().min(1).refine(v => /\S/.test(v), 'Quote must contain source text'),
   source_period: period,
 });
 const evidence = z.array(evidenceSchema);
@@ -41,6 +42,7 @@ const assertion = {
   supersedes: link.nullable(),
   update_reason: z.enum(['initial', 'updated', 'strengthened', 'weakened', 'corrected']),
   correction: link.nullable(),
+  prior_refs: z.array(link).optional(),
 };
 export const eventSchema = z.strictObject({
   ...base, type: z.literal('event'),
@@ -124,9 +126,51 @@ export const correctionSchema = z.strictObject({
   target: link, statement: text, reason: text,
   epistemic_status: z.literal('self_report'),
 });
+export const domains = ['identity', 'current_situation', 'values', 'important_history', 'motivations',
+  'decision_style', 'constraints', 'relationships', 'body_energy', 'work_vocation', 'knowledge_skills',
+  'resources', 'current_goals', 'recurring_patterns', 'desired_future'] as const;
+export const domain = z.enum(domains);
+export const fragmentSchema = z.strictObject({
+  ...base, type: z.literal('life_fragment'), authored_by: z.literal('user'),
+  epistemic_status: z.literal('self_report'), statement: text, occurred_at: day.nullable(),
+  fragment_kind: z.enum(['interview_answer', 'event', 'observation', 'state_evidence', 'interest_signal', 'decision_context', 'consumption']),
+  question: link.nullable(),
+});
+export const interviewSchema = z.strictObject({
+  ...base, type: z.literal('interview_turn'),
+  question: text.max(500).refine(v => !v.includes('\n') && (v.match(/[?？]/g) ?? []).length <= 1, 'Ask one question at a time'),
+  reason: text, focus: domain, gap: z.enum(['unknown', 'contradiction', 'low_confidence']),
+  based_on: z.array(link),
+});
+export const priorSchema = z.strictObject({
+  ...base, type: z.literal('prior_self_knowledge'), epistemic_status: z.literal('derived'),
+  source_label: text, import_method: z.literal('user_provided'), statement: text,
+  confidence: z.enum(['unknown', 'low']), supersedes: link.nullable(), correction: link.nullable(),
+  update_reason: z.enum(['initial', 'updated', 'weakened', 'corrected']),
+});
+export const selfModelSchema = z.strictObject({
+  ...base, type: z.literal('self_model'), version: z.literal('0.1'),
+  assertion_refs: z.array(link).min(1), prior_refs: z.array(link), readiness_reason: text, summary: text,
+  // A review focus, not a new psychological concept. Omission preserves Phase 2 semantics.
+  calibration_focus: z.array(link).min(1).optional(),
+  coverage: z.array(z.strictObject({
+    domain, status: z.enum(['known', 'uncertain', 'contradictory', 'unknown']),
+    explanation: text, refs: z.array(link),
+  })).length(domains.length),
+  unknowns: z.array(text), contradictions: z.array(text),
+});
+export const calibrationSchema = z.strictObject({
+  ...base, type: z.literal('calibration'), authored_by: z.literal('user'),
+  epistemic_status: z.literal('self_report'), model: link,
+  feedback: z.array(z.strictObject({
+    target: link, response: z.enum(['correct', 'wrong', 'partially_correct', 'outdated', 'not_sure']),
+    statement: text, correction: link.nullable(),
+  })).min(1),
+});
 export const recordSchema = z.discriminatedUnion('type', [
   eventSchema, stateSchema, patternSchema, decisionSchema,
   simulationSchema, outcomeSchema, reflectionSchema, correctionSchema,
+  fragmentSchema, interviewSchema, priorSchema, selfModelSchema, calibrationSchema,
 ]);
 export type MirrorRecord = z.infer<typeof recordSchema>;
 export type Evidence = z.infer<typeof evidenceSchema>;
@@ -135,7 +179,18 @@ export type Simulation = Extract<MirrorRecord, { type: 'simulation' }>;
 export const folders: Record<MirrorRecord['type'], string> = {
   event: 'Events', state: 'States', pattern: 'Patterns', decision: 'Decisions',
   simulation: 'Simulations', outcome: 'Outcomes', reflection: 'Reflections', correction: 'Corrections',
+  life_fragment: 'LifeFragments', interview_turn: 'Interviews', prior_self_knowledge: 'PriorKnowledge',
+  self_model: 'SelfModels', calibration: 'Calibrations',
 };
 export const recordPath = (r: Pick<MirrorRecord, 'type' | 'id'>) => `ThreefoldMirror/${folders[r.type]}/${r.id}.md`;
 export const wikilink = (file: string) => `[[${file.replace(/\.md$/i, '')}]]`;
 export const recordLink = (r: Pick<MirrorRecord, 'type' | 'id'>) => wikilink(recordPath(r));
+
+export const sourceGrantSchema = z.strictObject({
+  source_id: z.string().regex(/^[a-z][a-z0-9_-]*$/),
+  capabilities: z.array(z.enum(['read', 'search', 'recent', 'resolve'])),
+  permission: z.strictObject({ read: z.boolean(), search: z.boolean(), write: z.literal(false) }),
+  scope: z.strictObject({ include: z.array(z.string().min(1)).min(1), exclude: z.array(z.string().min(1)),
+    from: day.nullable(), to: day.nullable() }),
+  consent: z.strictObject({ status: z.enum(['granted', 'revoked']), statement: z.string().trim().min(1), recorded_at: instant }),
+}).refine(g => !g.scope.from || !g.scope.to || g.scope.from <= g.scope.to, 'Reversed source scope');

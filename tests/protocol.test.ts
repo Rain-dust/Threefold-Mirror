@@ -1,3 +1,4 @@
+import { readFixtureVault as readVault } from '../examples/legacy-vault.js';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -6,7 +7,9 @@ import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { recordSchema, recordLink, type MirrorRecord } from '../core/schema.js';
-import { parseMarkdown, readVault, resolveLink, cite, checkEvidence, safePath } from '../core/vault.js';
+import { parseMarkdown, resolveLink, cite, checkEvidence, safePath } from '../core/store.js';
+import { readStore } from '../core/store.js';
+import { MirrorInstance } from '../core/session.js';
 import { project, retrieve, decisionHistory } from '../core/model.js';
 import { appendRecord, validateRecord } from '../core/protocol.js';
 import { base, seedSources, initialStates, initialPattern, decision, fixtureSimulation, runGolden } from '../examples/fixture.js';
@@ -18,7 +21,7 @@ async function fixture(t: { after: (fn: () => Promise<void>) => void }, seed = t
   return root;
 }
 const clone = <T>(x: T): T => structuredClone(x);
-const write = (root: string, r: MirrorRecord, body = 'claim' in r ? r.claim : 'statement' in r ? r.statement : r.title) => appendRecord(root, r, body);
+const write = (root: string, r: MirrorRecord, body = 'claim' in r ? r.claim : 'statement' in r ? r.statement : r.title) => appendRecord(root, r, body, () => readVault(root));
 
 test('BOM/CRLF YAML and Unicode quotes have exact original line positions', () => {
   const raw = '\uFEFF---\r\ndate: 2026-09-28\r\nname: 林舟\r\n---\r\n# 标题\r\n精力偏低。\r\n';
@@ -238,10 +241,17 @@ test('no historical evidence still permits explicitly unknown conditional scenar
 });
 
 test('CLI rebuild loses nothing after cache deletion and CLI append is idempotent', async t => {
-  const root = await fixture(t), v = await readVault(root), r = initialStates(v)[0];
-  await write(root, r);
+  const sourceRoot = await fixture(t), root = await fixture(t, false);
+  const instance = new MirrorInstance(root);
+  const fragment: MirrorRecord = { ...base('LF-cli', 'life_fragment', '2026-09-29T08:00:00.000Z'), type: 'life_fragment',
+    authored_by: 'user', epistemic_status: 'self_report', statement: '最近精力偏低。', occurred_at: '2026-09-29', fragment_kind: 'state_evidence', question: null };
+  await instance.append(fragment, fragment.statement);
+  const r = { ...initialStates(await readVault(sourceRoot))[0], evidence: [cite((await readStore(root)).notes[0], fragment.statement)] };
+  await instance.append(r, 'claim' in r ? r.claim : r.title);
+  const config = path.join(root, '.threefold-mirror.local.json');
+  await fs.writeFile(config, JSON.stringify({ version: 1, instance_path: root, configured_sources: [] }));
   const cli = path.resolve('scripts/mirror.ts'), tsx = path.resolve('node_modules/tsx/dist/cli.mjs');
-  const run = async (...args: string[]) => JSON.parse((await promisify(execFile)(process.execPath, [tsx, cli, ...args, '--vault', root], { maxBuffer: 8_000_000 })).stdout);
+  const run = async (...args: string[]) => JSON.parse((await promisify(execFile)(process.execPath, [tsx, cli, ...args, '--config', config], { maxBuffer: 8_000_000 })).stdout);
   const first = await run('rebuild', '--at', '2026-09-29');
   const cacheFile = path.join(root, '.mirror-cache', 'index.json');
   const bytes = await fs.readFile(cacheFile, 'utf8');
@@ -251,6 +261,6 @@ test('CLI rebuild loses nothing after cache deletion and CLI append is idempoten
   assert.equal(await fs.readFile(cacheFile, 'utf8'), bytes);
   assert.equal((await run('validate')).errors.length, 0);
   const draftDir = await fixture(t, false), draft = path.join(draftDir, 'draft.md');
-  await fs.writeFile(draft, (await readVault(root)).records[0].note.raw);
+  await fs.writeFile(draft, (await readStore(root)).records.find(s => s.data.id === r.id)!.note.raw);
   assert.equal((await run('append', '--file', draft)).status, 'unchanged');
 });

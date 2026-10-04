@@ -1,9 +1,10 @@
+import { readFixtureVault as readVault } from './legacy-vault.js';
 /** Authored fictional case, not a user profile or a general-purpose inference engine. */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { appendRecord } from '../core/protocol.js';
 import { project, retrieve } from '../core/model.js';
-import { cite, readVault, resolveLink, type Vault } from '../core/vault.js';
+import { cite, resolveLink, type MirrorMemory as Vault } from '../core/store.js';
 import { recordLink, type Evidence, type MirrorRecord, type Simulation } from '../core/schema.js';
 
 export const sourceNotes: Record<string, string> = {
@@ -136,7 +137,7 @@ export async function runGolden(root: string) {
   const original = new Map(v.notes.map(n => [n.path, n.sha256]));
   const put = async (r: MirrorRecord, body?: string) => {
     const prose = body ?? `# ${r.title}\n\n${'statement' in r ? r.statement : 'claim' in r ? r.claim : r.type === 'simulation' ? r.cross_temporal_reflection : r.type === 'decision' ? r.question : r.type === 'reflection' ? r.comparison : ''}\n\n虚构案例，仅用于验证框架协议。\n`;
-    await appendRecord(root, r, prose); v = await readVault(root); return r;
+    await appendRecord(root, r, prose, () => readVault(root)); v = await readVault(root); return r;
   };
   const initialRetrieval = retrieve(v, '项目 精力', '2026-09-29');
   for (const s of initialStates(v)) await put(s);

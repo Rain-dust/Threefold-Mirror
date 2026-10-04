@@ -1,8 +1,9 @@
+import { readFixtureVault as readVault } from '../examples/legacy-vault.js';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { runGolden } from '../examples/fixture.js';
-import { readVault } from '../core/vault.js';
+
 import { validateRecord } from '../core/protocol.js';
 import { project } from '../core/model.js';
 

@@ -11,3 +11,11 @@ Pruned UI/server dependencies including React, React DOM, Express, Vite, Playwri
 The reusable design ideas retained are exact source hashing, safe vault path checks and atomic append. Their old App-specific implementation and schema were replaced with `core/` protocol primitives. No provider compatibility layer remains.
 
 The final repository's product is its Agent protocol, schemas, workflows, provenance, temporal lifecycle and validated Markdown loop. The fictional Golden Path is integration evidence with adversarial counter-evidence and correction, not UI display data or a claim about the real user.
+
+## Second architecture convergence · 2026-09-29
+
+Baseline: all 20 protocol tests and the 16-record Temporal Golden Path passed before edits. The previous coupling was core/vault.ts scanning both source notes and framework records, mandatory --vault CLI input, same-directory write-back, and a Skill requiring a Vault before use.
+
+Current boundary: core/store.ts reads only private Memory; core/sources.ts exposes opaque evidence operations; adapters/local-markdown.ts alone handles scoped source paths; core/session.ts composes the two. The original broad loader is retained solely in examples/legacy-vault.ts for immutable fictional regression data. Production no longer accepts --vault. Bootstrap is reconstructible from Interview, Fragment, Self Model and Calibration records; Prior is explicitly derived. Public/private path and consent guards plus a lightweight repository audit cover the new boundary.
+
+No real data source was discovered, connected or migrated in this refactor. New cases and tests use fictional temporary directories. No UI, server, cloud account/OAuth, provider SDK or additional third-party integration was added.

@@ -1,0 +1,11 @@
+{
+  "adapter": "local_markdown",
+  "root": "REPLACE_WITH_EXPLICITLY_CHOSEN_ABSOLUTE_SOURCE_DIRECTORY",
+  "grant": {
+    "source_id": "chosen",
+    "capabilities": ["read", "search", "recent", "resolve"],
+    "permission": { "read": true, "search": true, "write": false },
+    "scope": { "include": ["REPLACE_AUTHORIZED_FILE_OR_FOLDER"], "exclude": [], "from": null, "to": null },
+    "consent": { "status": "revoked", "statement": "REPLACE_WITH_ACTUAL_USER_CONSENT_BEFORE_GRANTING", "recorded_at": "2026-09-29T00:00:00.000Z" }
+  }
+}

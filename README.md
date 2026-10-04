@@ -1,113 +1,108 @@
 # 三世镜 / Threefold Mirror
 
-**三世镜是一套基于个人长期记忆运行的 Agent Framework。**
-它试图理解你如何从过去成为现在，当前的你处于什么状态，以及不同选择可能把你带向怎样的未来，让这些理解参与现在的决策。
+**三世镜是一套让 AI 随时间持续认识同一个人的 Agent Framework。**
 
-Obsidian 保存人生证据；同一个 **Mirror Agent** 通过过去、现在、未来三种时间视角工作。过去需要证据，现在是持续更新的 Self Model，未来是带假设的条件模拟。最终选择属于用户。
+**Threefold Mirror is an agent framework that learns a person over time.**
 
-它不是 App、Dashboard、数字人、心理测量工具或人生预测服务。没有界面、Web 服务、模型账号管理或三个互相聊天的人格。
+Understand who you were. Model who you are. Explore who you may become.
 
-## 如何运行
+它维护的是关于同一个人的 **Model of You**。同一个 Mirror Agent 使用 Past、Present、Future 三个时间视角：理解过去的证据，维护当下可修正的模型，探索未来的条件分支。推理由调用它的 Agent 完成；这里提供 Schema、确定性 CLI、工作流和长期记忆协议。没有 UI、服务器、模型 Provider SDK 或三个独立人格。
 
-```text
-原始人生记录 → 检索证据 → 过去轨迹 → 当前 Self Model
-                                      ↓
-                    Decision → 多个条件未来 → 用户选择
-                                      ↓
-                          行动 → Outcome → Reflection
-                                      ↓
-                      新状态 + 新历史 → 下一次决策
-```
+**Conversation first. Data optional. Consent required.**
 
-推理由当前调用它的 Codex、Astra、Claude Code 或其他 Agent 完成。这里提供可移植的 Schema、Workflow、证据协议、模板，以及确定性的本地 CLI。**CLI 不会独立理解人生，也不会调用一个隐藏的 LLM。**
+> 我不会先翻你的过去。
+>
+> 我会先认识现在的你。
+>
+> 如果你愿意，我们再一起回头看你留下的记录。
 
-将整个仓库提供给 Agent，然后说：
+## 第一次使用
 
-> 阅读 `skills/threefold-mirror/SKILL.md`。我的 Vault 在 `D:\Notes\Life`。用 Decision Mirror 帮我分析“未来三个月是否主要投入这个项目”。已有笔记只读；将三世镜记录写入 `ThreefoldMirror/`。先检索证据，遇到缺口保留未知。
+把 GitHub 项目链接交给自己的 Agent，让它安装项目、阅读 [Skill](skills/threefold-mirror/SKILL.md)，然后说：
 
-Skill 的引用以本仓库为根；请保留整个仓库，不要只复制单个 SKILL.md。无需安装 Obsidian 插件或更换用户目录结构。
+> 启动三世镜。
 
-## 本地运行与可复查示例
+Agent 先和你对话，每次只问一个当前有价值的问题，根据你的上一答决定下一问。它不会扫描磁盘、用户目录、笔记软件、聊天记录或云账户。
 
-需要 Node.js 22.12+。依赖安装需联网；以下命令自身不会发起网络请求。
+Phase 3 将认识方法写成了 [Human Understanding / Interview Model](INTERVIEW_MODEL.md)：从最近生活开始，先建立广角 Human Map，再按高信号区域深入验证，综合跨领域影响和时间变化，最后逐步校准少量关键判断。问题太难就降低抽象度，允许不知道、跳过；上下文充分后才深入模式、意义与价值。知道、做过、稳定做到分开记录，高强度 Channel 不自动变成长期人格，压力下的能力失效也保留时间与条件。
+
+**没有 Obsidian、Notion、飞书、日记、聊天导出或旧 AI 总结，都能开始。** 访谈形成 Self Model v0.1，说明已知、证据、推断、置信度、矛盾和未知。你对关键判断反馈 Correct / Wrong / Partially correct / Outdated / Not sure；不确定或错误判断先进入 Correction。首次校准完成后才进入正常 Decision / Future。
+
+外部资料完全可选。在访谈中出现值得补充的缺口时，你可以继续聊天、直接提供资料、导入以前 AI 的个人总结，或明确授权某一个有范围的数据来源。提到“我有 Obsidian”不等于授权读取。旧 AI 总结标为 **derived Prior Self Knowledge**，不当作原始事实，也不要求重新读取全部聊天。
+
+## 本地运行
+
+需要 Node.js 22.12+。安装依赖后，这些命令不发起网络请求：
 
 ```sh
 npm ci
+npm run mirror -- start
+npm run mirror -- help
+```
+
+没有本地配置时，`start` 直接给出访谈开场和一个问题，不发现任何来源，也不写个人资料。持久化时，Agent 为你指定独立私人目录：
+
+```text
+npm run mirror -- init --instance <PRIVATE_ABSOLUTE_DIRECTORY_OUTSIDE_REPOSITORY>
+```
+
+`init` 建立私人目录和 Git 忽略的 `.threefold-mirror.local.json`，默认 `configured_sources: []`；不会把“目录已创建”当作“已完成初始化”。完成校准后状态才是 `ready`。所有命令可用 `--config` 指定一个 `.threefold-mirror.local.*` 文件。
+
+Agent 通过 `ask` / `answer` 记录访谈，`append --file <private-draft.md>` 保存 State、Self Model、Correction 和 Calibration。草稿也保存在私人目录。`capture --statement "…"` 保存 Life Fragment，`import-prior --file <provided-summary> --label "以前 AI 的总结"` 保存旧模型。命令会校验结构、证据和关联；不能代替 Agent 判断用户是否真的说过这些话。
+
+## Life Sources 与 Mirror Memory
+
+```text
+用户对话 / 主动提供的资料 / 明确授权的 Life Sources
+                     ↓
+               Evidence Retrieval
+                     ↓
+             一个 Mirror Agent
+                     ↓
+            可修正的 Self Model
+                     ↓
+          私人的 Mirror Memory
+```
+
+**Threefold Mirror = Mirror Core + Personal Instance。**
+
+| Public Core：可开源 | Personal Instance：私人目录 |
+| --- | --- |
+| Core、Schemas、Skill、Workflows | Self Model、States、Patterns |
+| Evidence / Interview 协议 | Decisions、Simulations、Outcomes |
+| Adapters、Templates、Tests | Corrections、Life Fragments、导入的 Prior |
+| 明确虚构的 Examples | Evidence 引用、用户配置、缓存 |
+
+Life Sources 只读。Mirror Store 独立保存 `ThreefoldMirror/<类型>/<ID>.md`，不会假设模型写回原始笔记软件。只保留理解你需要的结构化记录和证据引用，不复制全部人生资料。外部引用由 `source_id + locator + hash + 原话/行号 + 时间范围` 组成。
+
+第一个实现是 [Local Markdown Adapter](adapters/local-markdown.ts)，也可读取明确授权的 Obsidian 目录。Core 只接收 [EvidenceSource](core/sources.ts)，不知道来源是哪种软件。目前没有实现 Notion、飞书、Google Drive 等 API。
+
+指定来源和授权范围后，用 `source-set --file <private-source-grant.json>` 保存授权，支持文件/文件夹白名单、排除路径、日期窗口、read/search 权限，write 固定为 false。`source-revoke --source <id>` 撤销；缩小范围可替换同 ID 的配置。见 [授权协议与示例](references/source-consent.md)。时间窗口只打开文件名带日期且在窗口内的 Markdown；无日期文件会跳过并报告，避免为了猜测日期而先读取内容。
+
+Personal Instance 必须在 Public Core 之外且不在 Git 仓库中；与本地 Life Source 也不能互相包含。私人配置、缓存和常见私人目录被忽略，另有 `npm run privacy:audit` 检查明显泄露。详见 [Privacy Boundary](references/privacy.md)。Git 忽略不是对强制添加或旧提交的保密保证。
+
+## 长期使用
+
+- **Capture**：“三世镜，记一下……”——随手记录事件、状态、兴趣、阅读/观看内容、决策背景。一次阅读不会自动变成稳定价值观。
+- **Check-in**：“三世镜，看看我最近状态。”——先读已有模型与授权证据，再追问少量真正缺失的信息。
+- **Reflection**：“三世镜，复盘一下这件事。”——区分事件、选择、计划、实际结果和解释，按证据追加经验与状态修订。
+
+Decision → Conditional Simulation → 用户选择 → Outcome → Reflection → 新模型 → 下一次 Decision 保持完整。没有发生的结果不能补写。Correction 先使旧判断退出当前模型，随后按证据追加修订；原记录始终保留。短期状态会复查、衰减和过期，不自动变成人格。源证据改变、删除、越出授权范围或撤销后，相关引用失效。
+
+长期记录为 Markdown + YAML，`.mirror-cache/` 可删除重建。并发写入采用协作锁和原子发布；相同 ID/内容重试无重复，不同内容拒绝覆盖。没有向量数据库、账户系统或云存储。Agent 是否把内容发送给远程模型取决于其运行环境。
+
+## 验证与阅读
+
+```sh
+npm run schema
 npm run check
 npm test
 npm run golden
+npm run privacy:audit
 ```
 
-`golden` 使用 [虚构 Vault](examples/golden-vault)，**不是你的个人资料**。它执行完整闭环，再执行一次检查无重复记录，输出 [运行报告](examples/GOLDEN_PATH_REPORT.md)。示例的十月 Outcome 是明确模拟的未来资料。它验证数据闭环，不声称验证真实个人预测准确率或不同 Agent 的理解质量。
+`golden` 运行原有 [Temporal Golden Path](examples/GOLDEN_PATH_REPORT.md)、[Bootstrap Golden Path](examples/BOOTSTRAP_GOLDEN_REPORT.md) 和 Phase 3 [Interview Golden Path](examples/INTERVIEW_GOLDEN_REPORT.md)。全部材料均虚构：Temporal 使用仓库内保留的旧版回归夹具，Bootstrap / Interview 使用仓库外临时实例；重复执行检查幂等，不会连接你的数据源。脚本验证协议和工作流，不能证明洞察正确或理解真人。跨 Agent Runtime 的真人实验按 [USER_ZERO_PROTOCOL](USER_ZERO_PROTOCOL.md) 另行开展，本轮尚未执行。
 
-在 PowerShell 中查看示例：
+框架入口：[AGENTS.md](AGENTS.md) · [Skill](skills/threefold-mirror/SKILL.md) · [Bootstrap](workflows/bootstrap.md) · [低摩擦使用](workflows/life-fragments.md) · [Data Contract](references/data-contract.md) · [Evidence](references/evidence.md) · [Temporal Model](references/temporal-model.md) · [逐项验收](references/acceptance.md)。
 
-```powershell
-$vault = (Resolve-Path 'examples/golden-vault').Path
-npm run mirror -- retrieve --vault "$vault" --query "项目 精力" --at 2026-09-29
-npm run mirror -- model --vault "$vault" --at 2026-10-29
-npm run mirror -- validate --vault "$vault"
-npm run mirror -- history --vault "$vault"
-npm run mirror -- rebuild --vault "$vault" --at 2026-10-29
-```
-
-真实 Vault 换成你的绝对路径。`retrieve` 返回原文候选与独立标记的推理记录；Agent 必须读上下文，不能把关键词命中当模式。可重复传 `--exclude Private` 限制本次检索；它不成为隐式全局配置。
-
-Agent 先在工作目录准备 Markdown，再执行：
-
-```sh
-npm run mirror -- append --vault /absolute/vault --file /absolute/draft.md
-```
-
-`append` 只在 Vault 的 `ThreefoldMirror/` 写入。它校验引用、时序和关联后原子追加；同 ID 同内容重试不重复写入，同 ID 不同内容报错。事件发生时间与记录写入时间分开，新记录时间必须递增。原笔记不改写。
-
-## 一个完整 Decision Mirror
-
-虚构人物林舟问：“未来三个月是否主要投入三世镜？”
-
-1. Mirror 找到 Atlas 暂停、Beacon 小范围交付和 Parser 持续维护。Atlas 同篇笔记提到搬家与照护；这些材料不能证明“技术难点消失就会放弃”。
-2. 当时 Self Model：自述精力偏低，每周确认四小时，重视个人持续使用。每项保留来源、认识论状态、时间范围、置信度、复查日与有效期。
-3. [D-001](examples/golden-vault/ThreefoldMirror/Decisions/D-001.md) 对应 [F-001](examples/golden-vault/ThreefoldMirror/Simulations/F-001.md) 的三个分支：主要投入、限时副项目、暂停。各有假设、原始证据、历史类比及差异、风险、机会、未知、1/3/12 个月变化与递增的不确定性。
-4. 案例用户明确选择 B。选择和“看见模拟后删减功能”的干预分别记录，计划不当作完成。
-5. 用户纠正关于 Atlas 的弱假设。[Correction](examples/golden-vault/ThreefoldMirror/Corrections/C-001.md) 立即使原判断退出当前模型；修订替代旧判断，历史仍可检查。
-6. 四周后 [Outcome](examples/golden-vault/ThreefoldMirror/Outcomes/O-001.md) 报告两个闭环、精力恢复，同时工作交付期结束。[Reflection](examples/golden-vault/ThreefoldMirror/Reflections/R-001.md) 记录干预影响与替代解释，不给没有对照组的结果算“预测准确率”。
-7. 新 State 直接引用 Outcome 原话。[D-002](examples/golden-vault/ThreefoldMirror/Decisions/D-002.md) 再问同题，[F-002](examples/golden-vault/ThreefoldMirror/Simulations/F-002.md) 基于新模型重新生成，使用刚发生的新历史。
-
-## 数据归属与可纠错性
-
-长期事实与推理都保存在人类可读的 **Markdown + YAML Frontmatter** 中：
-
-```text
-Vault/
-  原有笔记……                         # 只读，格式不变
-  ThreefoldMirror/
-    Events/                           # 经历、用户选择、干预
-    States/                           # 有时间尺度的状态修订
-    Patterns/                         # 可证伪的模式与反例
-    Decisions/                        # 问题、选项、限制与资源
-    Simulations/                      # 某时间点的条件分支
-    Outcomes/                         # 用户报告/可靠记录的结果
-    Reflections/                      # 对比、替代解释、待验证经验
-    Corrections/                      # 用户对旧判断的纠正
-  .mirror-cache/index.json             # 派生数据，可删除重建
-```
-
-没有 `persona.md` 或永久 `future-me.md`。Self Model 是当前有效 State/Pattern 的投影；历史判断始终保留。短期状态必须过期，复查到期会降低有效置信度，不会自动升级为人格。新证据可以强化、削弱或替代旧判断。用户纠错先记录 Correction，再按需追加修订。
-
-重要判断保留 wikilink、原话、文件 SHA-256、原始行号、来源时间范围和反证。源文改变时旧引用被标记失效，当前模型不再默默信任它。AI 总结不能成为原始证据；Reflection 的新经验必须重新连到实际 Outcome。校验能确认引用存在，**不能自动证明语义、因果或用户授权正确**，这些是 Mirror 的职责。
-
-本项目的读写与索引在本地进行。实际运行 Agent 时，资料是否发送给远程模型取决于该 Agent 的运行环境；本框架不提供云存储，也不替运行环境承诺离线隐私。无需本框架之后，Markdown 仍能直接打开、检索和用 Git 版本控制。
-
-## 框架入口
-
-| 内容 | 入口 |
-| --- | --- |
-| Agent 路由与约束 | [AGENTS.md](AGENTS.md)、[Skill](skills/threefold-mirror/SKILL.md) |
-| 过去、现在、条件未来 | [Past](workflows/past.md)、[Present](workflows/present.md)、[Future](workflows/future.md) |
-| 决策闭环与纠错 | [Decision Mirror](workflows/decision-mirror.md)、[Reflection / Correction](workflows/reflection-correction.md) |
-| 数据、证据、时间协议 | [Data Contract](references/data-contract.md)、[Evidence](references/evidence.md)、[Temporal Model](references/temporal-model.md) |
-| 数据协议 | [JSON Schema](schemas/record.schema.json)、[字段说明](schemas/README.md)、[模板](templates/) |
-| 确定性实现 | [core/](core/)、[CLI](scripts/mirror.ts)、[测试](tests/protocol.test.ts) |
-| 验收与审计 | [验收表](references/acceptance.md)、[仓库审计](references/repository-audit.md) |
-
-当前边界：本地单 Vault、协作式单写者协议、词语检索候选、不做向量检索或预测校准数学。Node 是参考实现的运行时，不是数据格式依赖。JSON Schema 表达字段结构，跨记录约束由协议和校验器补充。未知 schema_version 拒绝写入；未来升级需显式迁移，不能批量改用户原笔记。
+旧版 `--vault` 不再用于生产 CLI。新用户用 `start`；已有 MVP 记录的迁移需显式选择私人目录并重建外部引用，不能自动移动原笔记或改写旧断言。旧的同目录布局仅保留在虚构回归夹具中。

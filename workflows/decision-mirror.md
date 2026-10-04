@@ -1,5 +1,7 @@
 # Decision Mirror · complete loop
 
+For an uncalibrated instance, first complete [Self Model v0.1 and identity calibration](bootstrap.md). External evidence is optional. Write only to private Mirror Memory; sources remain read-only.
+
 1. **Define** the real question, window, alternatives, constraints, resources and review date. Seek only missing facts that change the decision. Persist Decision when write-back is authorized.
 2. **Retrieve Past** with [Past](past.md). Show analogues, differences, counter-evidence and missing history. Don't force every choice into an investment/intensity template.
 3. **Update Present** with [Present](present.md). Keep the model small, relevant and time-bounded.
